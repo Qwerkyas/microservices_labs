@@ -1,0 +1,27 @@
+services:
+  postgres:
+    image: postgres:17.1-alpine
+    environment:
+      POSTGRES_USER: database
+      POSTGRES_PASSWORD: database
+      POSTGRES_database: database
+    ports:
+      - "5432:5432"
+
+  core-service:
+    build: ./core-service
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdatabasec:postgresql://postgres:5432/database
+      SPRING_DATASOURCE_USERNAME: database
+      SPRING_DATASOURCE_PASSWORD: database
+    ports:
+      - "8081:8081"
+
+  api-gateway:
+    build: ./api-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - core-service

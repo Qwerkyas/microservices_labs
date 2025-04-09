@@ -1,9 +1,7 @@
 package com.qwerty.core_service.entity;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
@@ -11,6 +9,8 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +22,9 @@ public class Appointment {
 
     @Column(name = "date_of_birth", nullable = false)
     LocalDate dateOfBirth;
+
+    @Column(name = "age", nullable = false)
+    Integer age;
 
     @Column(name = "doctor", nullable = false)
     String doctor;
